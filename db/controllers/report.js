@@ -1,4 +1,5 @@
 import User from '../models/user'
+import Report from '../models/report'
 import { normalizeId, dbConnect } from './util'
 
 export async function getAll(userId) {
@@ -17,25 +18,63 @@ export async function getByReportId(userId, reportId) {
   return null
 }
 
+export async function create(firstName, lastName, jobTitle, bonusEligible, longTermIncentive, assessment, strength, weakness, supervisorName, perner){
+  if (!(firstName && lastName && jobTitle && bonusEligible && longTermIncentive)){
+    throw new Error('Required fields must be included.')
+  }
+  await dbConnect()
+  const report = await Report.create({firstName, lastName, jobTitle, bonusEligible, longTermIncentive, assessment, strength, weakness, supervisorName, perner})
+  if (!report)
+    throw new Error('Error inserting Report')
+  return normalizeId(report)
+}
+
 export async function add(userId, report) {
   await dbConnect()
   const user = await User.findByIdAndUpdate(
     userId,
     { $addToSet: { savedReports: report } },
     { new: true }
-  )
-  if (!user) return null
-  const addedReport = user.savedReports.find(saved => saved.reportID === report.reportID)
-  return normalizeId(addedReport)
+    )
+  if (!user){
+    return null
+  }
+    
+  return report
 }
 
 export async function remove(userId, reportId) {
   await dbConnect()
-  const user = await User.findByIdAndUpdate(
+  let user = await User.findByIdAndUpdate(
     userId,
-    { $pull: { savedReports: {_id: reportId } } },
-    { new: true }
+    { $pull: { savedReports: reportId } }
   )
   if (!user) return null
-  return true
+
+  return {}
+}
+
+export async function update(firstName,lastName,jobTitle,bonusEligible,longTermIncentive,assessment,strength,weakness,supervisorName,perner, reportID){
+  if(!(firstName && lastName && jobTitle && bonusEligible && longTermIncentive && reportID)){
+    throw new Error("Required fields must be included.")
+  }
+  await dbConnect()
+  const body = {
+    "firstName":firstName,
+     "lastName":lastName,
+     "jobTitle":jobTitle,
+     "bonusEligible":bonusEligible,
+     "longTermIncentive":longTermIncentive,
+     "assessment":assessment,
+     "strength":strength,
+     "weakness":weakness,
+     "supervisorName":supervisorName,
+     "perner":perner
+  }
+  const report = await Report.findOneAndUpdate({"_id":reportID},{$set:body},{returnOriginal: false})
+
+  if (!report)
+    throw new Error('Error updating Report')
+
+  return normalizeId(report)
 }

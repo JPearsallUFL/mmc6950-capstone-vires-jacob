@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose'
+import {Schema, model, models} from 'mongoose'
 
 const reportSchema = new Schema({
     reportID: Schema.Types.ObjectId,
@@ -14,7 +14,7 @@ const reportSchema = new Schema({
         type: String,
         required: true
     },
-    bonusEligble: {
+    bonusEligible: {
         type: Boolean,
         required: true
     },
@@ -38,3 +38,5 @@ const reportSchema = new Schema({
         type: Number
     }
 })
+
+export default models.Report || model('Report', reportSchema)

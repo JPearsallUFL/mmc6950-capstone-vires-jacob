@@ -1,5 +1,6 @@
 import User from '../models/user'
 import { normalizeId, dbConnect } from './util'
+import { hashText } from './util/hashText'
 
 export async function create(username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail) {
   if (!(username && password && firstName && lastName && department && emailAddress && supervisorName && supervisorEmail)){
@@ -20,10 +21,9 @@ export async function updatePassword(username, newPassword){
   if(!(username && newPassword)){
     throw new Error("Username and new password must be included.")
   }
-  console.log(username + "  " + password)
   await dbConnect()
-  const password = newPassword
-  const user = await User.updateOne({"username":username},{$set:{"password":password}})
+  const password = await hashText(newPassword)
+  const user = await User.findOneAndUpdate({"username":username},{$set:{"password":password}},{returnOriginal: false})
 
   if (!user)
     throw new Error('Error updating User')

@@ -65,12 +65,13 @@ async function signup(req, res) {
 async function updatePassword(req, res) {
     try {
         const {username, password, newPassword} = req.body
-        var user = await db.auth.login(username, password)
+        let user = await db.auth.login(username, password)
         req.session.user = {
             username: user.username,
             id: user.id
         }
         await req.session.save()
+
         user = await db.user.updatePassword(username, newPassword)
         await req.session.destroy()
         req.session.user = {

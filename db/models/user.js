@@ -1,6 +1,6 @@
 import {Schema, model, models} from 'mongoose'
 import reportSchema from './report'
-import bcrypt from 'bcrypt'
+import { hashText } from '../controllers/util/hashText'
 
 const UserSchema = new Schema({
     username: {
@@ -44,7 +44,7 @@ const UserSchema = new Schema({
 
 // hashes the password before it's stored in mongo
 UserSchema.pre('save', async function(next) {
-    this.password = await bcrypt.hash(this.password, 10)
+    this.password = await hashText(this.password)
     next()
   })
   
