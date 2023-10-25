@@ -11,15 +11,14 @@ export default function Header(props) {
       <div>
       {props.isLoggedIn ? (
         <>
-          <Link href="/favorites">Favorites</Link>
           <Link href="/search">Search</Link>
+          <Link href="/myReports">My Saved Reports</Link>
           <a href="#" onClick={logout}>
             Logout
           </a>
         </>
       ) : (
         <>
-          <Link href="/search">Search</Link>
           <Link href="/login">Login</Link>
           <Link href="/signup">Sign Up</Link>
         </>

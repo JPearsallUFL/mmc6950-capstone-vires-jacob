@@ -21,8 +21,6 @@ export default withIronSessionApiRoute(
 
         return res.status(404).end()  
     }
-    // console.log(req.query.action)
-    // console.log(req.method)
   },
   sessionOptions
 )
@@ -33,7 +31,9 @@ async function login(req, res) {
     const user = await db.auth.login(username, password)
     req.session.user = {
       username: user.username,
-      id: user.id
+      id: user.id,
+      firstName: user.firstName,
+      pernr: user.pernr
     }
     await req.session.save()
     res.status(200).end()
@@ -49,38 +49,44 @@ async function logout(req, res) {
 
 async function signup(req, res) {
   try {
-    const {username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail} = req.body
-    const user = await db.user.create(username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail)
-    req.session.user = {
-      username: user.username,
-      id: user.id
+    const {username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail, pernr} = req.body
+    if (password.length < 20){
+      throw new Error("Password must be at least 20 characters")
     }
-    await req.session.save()
-    res.redirect('/')
+    const user = await db.user.create(username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail, pernr)
+    if (res.status(200)){
+      res.redirect('/login')
+    }
+    // req.session.user = {
+    //   username: user.username,
+    //   id: user.id
+    // }
+    // await req.session.save()
+    // res.redirect('/')
   } catch(err) {
     res.status(400).json({error: err.message})
   }
 }
 
 async function updatePassword(req, res) {
-    try {
-        const {username, password, newPassword} = req.body
-        let user = await db.auth.login(username, password)
-        req.session.user = {
-            username: user.username,
-            id: user.id
-        }
-        await req.session.save()
+  try {
+      const {username, password, newPassword} = req.body
+      let user = await db.auth.login(username, password)
+      req.session.user = {
+          username: user.username,
+          id: user.id
+      }
+      await req.session.save()
 
-        user = await db.user.updatePassword(username, newPassword)
-        await req.session.destroy()
-        req.session.user = {
-            username: user.username,
-            id: user.id
-         }
-        await req.session.save()
-        res.redirect('/')
-    } catch(err) {
-      res.status(400).json({error: err.message})
-    }
+      user = await db.user.updatePassword(username, newPassword)
+      await req.session.destroy()
+      req.session.user = {
+          username: user.username,
+          id: user.id
+        }
+      await req.session.save()
+      res.redirect('/')
+  } catch(err) {
+    res.status(400).json({error: err.message})
   }
+}

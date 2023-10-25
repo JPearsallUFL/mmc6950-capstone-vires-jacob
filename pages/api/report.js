@@ -9,10 +9,10 @@ export default withIronSessionApiRoute(
             case 'POST':
                 if (req.session.user) {
                     try{
-                        const {firstName, lastName, jobTitle, bonusEligible, longTermIncentive, assessment, strength, weakness, supervisorName, perner} = req.body
-                        const report = await db.report.create(firstName,lastName,jobTitle,bonusEligible,longTermIncentive,assessment,strength,weakness,supervisorName,perner)
-                        console.log(report)
-                        const reportLink = await db.report.add(req.session.user.id, report.id)
+                        const {first_name, last_name, title, level, bonus, lti, assessment, strength, weakness, supervisorName, pernr, currentDate} = req.body
+                        const reportName = first_name + " " + last_name + " " + currentDate + " Report"
+                        const report = await db.report.create(first_name,last_name,title,level,bonus,lti,assessment,strength,weakness,supervisorName,pernr,reportName)
+                        const reportLink = await db.report.add(req.session.user.id, report.id, reportName)
 
                         if (reportLink === null) {
                             req.session.destroy()
@@ -31,24 +31,33 @@ export default withIronSessionApiRoute(
             case 'DELETE':
                 if (req.session.user){
                     try{
-                        const report = await db.report.remove(req.session.user.id, req.body.reportID)
-                        if (report === null) {
-                            req.session.destroy()
-                            return res.status(401)
-                        }
+                        const id = req.headers.id
+                        const reportName = req.headers.name
+                        const reportId = {"id":id, "name":reportName}
                         //This Value needs updated during every new deploy
-                        const admin = "651f5d32116bd1d9e2741190"
-                        const trash = await db.report.add(admin, req.body.reportID)
+                        const admin = "6538546c587ce9ea95c31950"
+                        const trash = await db.report.add(admin, reportId.id)
                         if (!trash){
                             //Want to add failure log
-                            return null
+                            return res.status(401)
                         }
-
-                        return res.status(200).json(report)
+                        const sessionid = req.session.user.id
+                        const userId = {_id: sessionid}
+                        try{
+                            const report = await db.report.remove(userId, reportId)
+                            if (report === null) {
+                                req.session.destroy()
+                                return res.status(401)
+                            }
+                            return res.status(200).json(report)
+                        }
+                        catch(error){
+                            return res.status(400).json({error: error.message})
+                        }
                     }
                     catch(error){
                         return res.status(400).json({error: error.message})
-                        }
+                    }
                 }
                 else {
                     return res.status(401).json("User is not logged in")
@@ -56,15 +65,29 @@ export default withIronSessionApiRoute(
             case 'PUT':
                 if (req.session.user) {
                     try{
-                        const {firstName, lastName, jobTitle, bonusEligible, longTermIncentive, assessment, strength, weakness, supervisorName, perner, reportID} = req.body
-                        const report = db.report.update(firstName,lastName,jobTitle,bonusEligible,longTermIncentive,assessment,strength,weakness,supervisorName,perner, reportID)
+                        const {first_name, last_name, title, level, bonus, lti, assessment, strength, weakness, supervisorName, pernr, reportID} = req.body
+                        const report = db.report.update(first_name,last_name,title,level,bonus,lti,assessment,strength,weakness,supervisorName,pernr, reportID)
                         if (report === null) {
                             req.session.destroy()
                             return res.status(401)
                         }
-                        return res.status(200).json(report)
+                        return res.status(200).json("Report Updated")
                     }
                     catch (error) {
+                        return res.status(400).json({error: error.message})
+                    }
+                }
+                else {
+                    return res.status(401).json("User is not logged in")
+                }
+            case "GET":
+                if (req.session.user){
+                    const reportID = req.headers.reportid
+                    try{
+                        const report = await db.report.getByReportId(reportID)
+                        return res.status(200).json(report)
+                    }
+                    catch(error){
                         return res.status(400).json({error: error.message})
                     }
                 }

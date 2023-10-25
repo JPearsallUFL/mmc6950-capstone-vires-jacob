@@ -14,6 +14,10 @@ const reportSchema = new Schema({
         type: String,
         required: true
     },
+    jobLevel: {
+        type: String,
+        required: true
+    },
     bonusEligible: {
         type: Boolean,
         required: true
@@ -34,8 +38,12 @@ const reportSchema = new Schema({
     supervisorName: {
         type: String
     },
-    perner: {
+    pernr: {
         type: Number
+    },
+    reportName: {
+        type: String,
+        required: true
     }
 })
 

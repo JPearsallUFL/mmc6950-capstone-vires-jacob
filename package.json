@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@next/font": "^13.0.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@next/font": "^13.0.3",
     "bcrypt": "^5.1.0",
+    "date-fns": "^2.30.0",
     "iron-session": "^6.3.1",
-    "mongoose": "^6.4.0",
+    "mongoose": "^6.12.1",
     "next": "13.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"

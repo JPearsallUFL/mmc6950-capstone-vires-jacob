@@ -1,10 +1,10 @@
-import {Schema, model, models} from 'mongoose'
+import {Schema, model, models, ObjectId} from 'mongoose'
 import reportSchema from './report'
 import { hashText } from '../controllers/util/hashText'
 
 const UserSchema = new Schema({
     username: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
@@ -31,15 +31,21 @@ const UserSchema = new Schema({
         required: true
     },
     supervisorName: {
-        type: String
+        type: String,
+        required: true
     },
     supervisorEmail: {
-        type: String
+        type: String,
+        required: true
+    },
+    pernr: {
+        type: String,
+        required: true
     },
     savedReports: {
         type:Array,
-        "default": [reportSchema]
-    }
+        "default": [reportSchema] 
+    },
 })
 
 // hashes the password before it's stored in mongo
@@ -49,3 +55,5 @@ UserSchema.pre('save', async function(next) {
   })
   
   export default models.User || model('User', UserSchema)
+
+  //TestingTestingTesting

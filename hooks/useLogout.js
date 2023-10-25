@@ -6,7 +6,7 @@ export default function useLogout() {
     try {
       const res = await fetch('/api/auth/logout', {method: 'POST'})
       if (res.status === 200)
-        router.replace(router.asPath)
+        router.push("/")
     } catch(err) {
       console.log(err)
     }
