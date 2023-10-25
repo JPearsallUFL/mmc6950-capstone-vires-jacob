@@ -54,6 +54,7 @@ async function signup(req, res) {
       throw new Error("Password must be at least 20 characters")
     }
     const user = await db.user.create(username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail, pernr)
+    console.log(user)
     if (res.status(200)){
       res.redirect('/login')
     }
