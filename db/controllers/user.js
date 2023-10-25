@@ -16,7 +16,7 @@ export async function create(username, password, firstName, lastName, department
     const user = await User.create({username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail, pernr})
     if (!user)
       throw new Error('Error inserting User')
-  
+    console.log(user)
     return normalizeId(user)
   }
   catch (err) {
