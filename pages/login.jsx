@@ -41,8 +41,10 @@ export default function Login(props) {
         },
         body: JSON.stringify({ username, password }),
       });
+      console.log(res)
       if (res.status === 200) return router.push('/search');
       const { error: message } = await res.json();
+      console.log(message)
       setError(message);
     } catch (err) {
       console.log(err);

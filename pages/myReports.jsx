@@ -41,7 +41,7 @@ export default function SavedReports(props) {
             });
             const newRes = await res.json()
             if (newRes){
-                setReports([newRes])
+                setReports(newRes)
                 console.log(myReports)
             }
         }
@@ -65,13 +65,13 @@ export default function SavedReports(props) {
                 }
                 });
             const list = await res.json()
-            console.log(list)
             const reportNames = list.savedReports
-            setReports([list])
+            console.log(reportNames)
+            setReports(list.savedReports)
             console.log(myReports)
 
             
-            reportNames.map((a) => {
+            myReports.map((a) => {
                 let row = document.createElement("tr")
 
                 let edit_button = document.createElement("button")
@@ -106,7 +106,7 @@ export default function SavedReports(props) {
             divChange.appendChild(document.createTextNode("Shit it doesnt"))
         }
     }
-    useEffect(() => {handleSearch();},[]);
+    useEffect(() => {handleSearch();},[myReports]);
 
   return (
     <>
@@ -123,6 +123,7 @@ export default function SavedReports(props) {
         <div id="report_map">
             <table id="reports_table"></table>
         </div>
+        <div><myReports></myReports></div>
       </main>
 
     </>
