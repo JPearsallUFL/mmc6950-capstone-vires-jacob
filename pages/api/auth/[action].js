@@ -36,6 +36,7 @@ async function login(req, res) {
       pernr: user.pernr
     }
     await req.session.save()
+    console.log(req.session)
     res.status(200).end()
   } catch(err) {
     res.status(400).json({error: err.message})
