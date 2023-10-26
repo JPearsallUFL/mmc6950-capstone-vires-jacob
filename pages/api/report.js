@@ -35,7 +35,7 @@ export default withIronSessionApiRoute(
                         const reportName = req.headers.name
                         const reportId = {"id":id, "name":reportName}
                         //This Value needs updated during every new deploy
-                        const admin = "6538546c587ce9ea95c31950"
+                        const admin = "65396b98902bc8d18f041839"
                         const trash = await db.report.add(admin, reportId.id)
                         if (!trash){
                             //Want to add failure log

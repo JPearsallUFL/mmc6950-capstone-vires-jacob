@@ -3,7 +3,7 @@ import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 import Header from "../components/header";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 //import styles from "../styles/Home.module.css";
 
 export const getServerSideProps = withIronSessionSsr(
@@ -19,7 +19,9 @@ export const getServerSideProps = withIronSessionSsr(
   sessionOptions
 );
 
-export default function Home(props) {
+export default function SavedReports(props) {
+
+    const [myReports, setReports] = useState([])
 
     const router = useRouter();
 
@@ -37,6 +39,11 @@ export default function Home(props) {
                     "name": reportName
                 },
             });
+            const newRes = await res.json()
+            if (newRes){
+                setReports([newRes])
+                console.log(myReports)
+            }
         }
         catch(err){
             console.log(err)
@@ -58,7 +65,11 @@ export default function Home(props) {
                 }
                 });
             const list = await res.json()
+            console.log(list)
             const reportNames = list.savedReports
+            setReports([list])
+            console.log(myReports)
+
             
             reportNames.map((a) => {
                 let row = document.createElement("tr")
@@ -75,7 +86,6 @@ export default function Home(props) {
                 delete_button.innerHTML="Delete Report"
                 delete_button.onclick = function(){
                     deleteReport(a.id,a.name)
-                    //this isnt happening because of 400(bad request) error, Think its from race condtion.
                     router.refresh
                 };
                 
@@ -96,7 +106,7 @@ export default function Home(props) {
             divChange.appendChild(document.createTextNode("Shit it doesnt"))
         }
     }
-    useEffect(() => {handleSearch();},[props]);
+    useEffect(() => {handleSearch();},[]);
 
   return (
     <>

@@ -23,7 +23,7 @@ export const getServerSideProps = withIronSessionSsr(
   sessionOptions
 );
 
-export default function NewReport(props) {
+export default function EditReport(props) {
     let reportID = sessionStorage.getItem("report")
     // sessionStorage.removeItem("name")
 

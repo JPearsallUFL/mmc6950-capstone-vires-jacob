@@ -46,18 +46,16 @@ export async function remove(userId, reportId) {
   await dbConnect()
   const report = reportId.id
   const name = reportId.name
-  let user = await User.findByIdAndUpdate(
-    userId,
-    { $pull: { savedReports: {id: report, name: name} } }, {new:true},(error,result) => {
-      if (error){
-        return false
-      }
-      else {
-        console.log(result)
-        return true
-      } 
-    }
-  )
+  try{
+    let user = await User.findById(userId)
+      if (!user) throw new Error("User does not exist")
+    user.savedReports = user.savedReports.filter(savedReport => savedReport.id !== report)
+    user.save()
+    return user
+  }
+  catch(error) {
+    return null
+  }
 }
 
 export async function update(firstName,lastName,jobTitle,jobLevel,bonusEligible,longTermIncentive,assessment,strength,weakness,supervisorName,pernr,reportID){
