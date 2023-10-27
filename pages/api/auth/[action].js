@@ -1,6 +1,8 @@
 import { withIronSessionApiRoute } from "iron-session/next";
 import sessionOptions from "../../../config/session"
 import db from '../../../db'
+import { hashText } from "../../../db/controllers/util/hashText";
+
 
 // this file handles /api/auth/:action with any request method (GET, POST, etc)
 export default withIronSessionApiRoute(
@@ -53,8 +55,11 @@ async function signup(req, res) {
     if (password.length < 20){
       throw new Error("Password must be at least 20 characters")
     }
-    const user = await db.user.create(username, password, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail, pernr)
-    console.log(user)
+    // hashes the password before it's stored in mongo
+
+    const hashPassword = await hashText(password)
+
+    const user = await db.user.create(username, hashPassword, firstName, lastName, department, emailAddress, supervisorName, supervisorEmail, pernr)
     if (res.status(200)){
       res.redirect('/login')
     }

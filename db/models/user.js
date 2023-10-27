@@ -1,6 +1,5 @@
 import {Schema, model, models, ObjectId} from 'mongoose'
 import reportSchema from './report'
-import { hashText } from '../controllers/util/hashText'
 
 const UserSchema = new Schema({
     username: {
