@@ -49,12 +49,6 @@ const UserSchema = new Schema({
 },{
     versionKey: false
 })
-
-// hashes the password before it's stored in mongo
-UserSchema.pre('save', async function(next) {
-    this.password = await hashText(this.password)
-    next()
-  })
   
   export default models.User || model('User', UserSchema)
 
