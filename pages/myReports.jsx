@@ -71,7 +71,7 @@ export default function SavedReports(props) {
             console.log(myReports)
 
             
-            myReports.map((a) => {
+            reportNames.map((a) => {
                 let row = document.createElement("tr")
 
                 let edit_button = document.createElement("button")
