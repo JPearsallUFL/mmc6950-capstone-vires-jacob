@@ -61,7 +61,7 @@ export default function Search(props) {
         }
         catch (err){
             console.log(err)
-            divChange.appendChild(document.createTextNode("Shit it doesnt"))
+            divChange.appendChild(document.createTextNode(err))
         }
     }
     

@@ -103,10 +103,10 @@ export default function SavedReports(props) {
         }
         catch (err){
             console.log(err)
-            divChange.appendChild(document.createTextNode("Shit it doesnt"))
+            divChange.appendChild(document.createTextNode(err))
         }
     }
-    useEffect(() => {handleSearch();},[myReports]);
+    useEffect(() => {handleSearch();},[]);
 
   return (
     <>
@@ -123,7 +123,6 @@ export default function SavedReports(props) {
         <div id="report_map">
             <table id="reports_table"></table>
         </div>
-        <div><myReports></myReports></div>
       </main>
 
     </>
