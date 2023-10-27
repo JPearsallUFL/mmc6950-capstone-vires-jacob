@@ -49,7 +49,6 @@ export default function Signup(props) {
             const rostrRes = await singlePerner(pernr)
             const firstName = rostrRes.first_name
             const lastName = rostrRes.last_name
-            //confirm what Dennis wants here
             const department = rostrRes.organizational_unit_name
             const emailAddress = rostrRes.email
             const supervisorName = rostrRes.supervisor.full_name
@@ -62,7 +61,8 @@ export default function Signup(props) {
                 },
                 body: JSON.stringify({username, password, firstName, lastName, emailAddress, department, supervisorName, supervisorEmail, pernr}),
             });
-            if (res.status === 200) return router.push("/search");
+
+            if (res.status === 200) return router.push("/login");
             else{
                 const signupError = await res.text();
             }
