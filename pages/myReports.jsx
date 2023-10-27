@@ -41,8 +41,7 @@ export default function SavedReports(props) {
             });
             const newRes = await res.json()
             if (newRes){
-                setReports(newRes)
-                console.log(myReports)
+                setReports(newRes.savedReports)
             }
         }
         catch(err){
@@ -51,9 +50,7 @@ export default function SavedReports(props) {
     }
     
     async function handleSearch(){
-        
-        var divChange = document.getElementById("reports_table")
-        divChange.innerHTML = ""
+       
         try {
             
             const res = await fetch("/api/user", {
@@ -65,48 +62,51 @@ export default function SavedReports(props) {
                 }
                 });
             const list = await res.json()
-            const reportNames = list.savedReports
-            console.log(reportNames)
             setReports(list.savedReports)
-            console.log(myReports)
-
-            
-            reportNames.map((a) => {
-                let row = document.createElement("tr")
-
-                let edit_button = document.createElement("button")
-                edit_button.data = a.id
-                edit_button.innerHTML="Edit Report"
-                edit_button.onclick = function(){
-                    sessionStorage.setItem("report",a.id)
-                    router.push("/editReport")
-                };
-
-                let delete_button = document.createElement("button")
-                delete_button.innerHTML="Delete Report"
-                delete_button.onclick = function(){
-                    deleteReport(a.id,a.name)
-                    router.refresh
-                };
-                
-                let name_cell = document.createElement("td")
-                let edit_cell = document.createElement("td")
-                let delete_cell = document.createElement("td")
-                name_cell.innerHTML = a.name
-                row.appendChild(name_cell)
-                edit_cell.appendChild(edit_button)
-                row.appendChild(edit_cell)
-                delete_cell.appendChild(delete_button)
-                row.appendChild(delete_cell)
-                divChange.appendChild(row)
-            })
         }
         catch (err){
             console.log(err)
             divChange.appendChild(document.createTextNode(err))
         }
     }
+
+    async function createTable(){
+        var divChange = document.getElementById("reports_table")
+        divChange.innerHTML = ""
+        if (myReports.length === 0) return
+        myReports.map((a) => {
+            let row = document.createElement("tr")
+            
+            let edit_button = document.createElement("button")
+            edit_button.data = a.id
+            edit_button.innerHTML="Edit Report"
+            edit_button.onclick = function(){
+                sessionStorage.setItem("report",a.id)
+                router.push("/editReport")
+            };
+            
+            let delete_button = document.createElement("button")
+            delete_button.innerHTML="Delete Report"
+            delete_button.onclick = function(){
+                deleteReport(a.id,a.name)
+                router.refresh
+            };
+            
+            let name_cell = document.createElement("td")
+            let edit_cell = document.createElement("td")
+            let delete_cell = document.createElement("td")
+            name_cell.innerHTML = a.name
+            row.appendChild(name_cell)
+            edit_cell.appendChild(edit_button)
+            row.appendChild(edit_cell)
+            delete_cell.appendChild(delete_button)
+            row.appendChild(delete_cell)
+            divChange.appendChild(row)
+        })
+    }
+
     useEffect(() => {handleSearch();},[]);
+    useEffect(() => {createTable()}, [myReports])
 
   return (
     <>
@@ -119,7 +119,6 @@ export default function SavedReports(props) {
 
       <main>
         <h1>My Saved Reports</h1>
-        <p>TODO: Display a list of Saved Reports with option to Edit/Delete</p>
         <div id="report_map">
             <table id="reports_table"></table>
         </div>

@@ -5,10 +5,6 @@ import sessionOptions from './config/session'
 export async function middleware(req) {
   const res = NextResponse.next()
   const session = await getIronSession(req, res, sessionOptions)
-  console.log(req)
-  console.log(res)
-  console.log(sessionOptions)
-  console.log(session)
 
   const { user } = session
   if (!user) {
