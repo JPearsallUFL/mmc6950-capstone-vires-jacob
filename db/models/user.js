@@ -46,6 +46,9 @@ const UserSchema = new Schema({
         type:Array,
         "default": [reportSchema] 
     },
+},{
+    collection:'UserSchema',
+    versionKey: false
 })
 
 // hashes the password before it's stored in mongo
@@ -55,5 +58,3 @@ UserSchema.pre('save', async function(next) {
   })
   
   export default models.User || model('User', UserSchema)
-
-  //TestingTestingTesting

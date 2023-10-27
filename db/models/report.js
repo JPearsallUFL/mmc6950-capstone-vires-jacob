@@ -45,6 +45,9 @@ const reportSchema = new Schema({
         type: String,
         required: true
     }
+},{
+    collection:'reportSchema',
+    versionKey:false
 })
 
 export default models.Report || model('Report', reportSchema)
