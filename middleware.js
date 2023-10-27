@@ -1,19 +1,18 @@
 import { NextResponse } from 'next/server'
-import { getIronSession } from "iron-session/edge";
+import { getIronSession } from "iron-session/edge"
 import sessionOptions from './config/session'
 
 export async function middleware(req) {
-  console.log(req)
-  const res = NextResponse.next();
-  console.log(sessionOptions);
-  const session = await getIronSession(req, res, sessionOptions);
+  const res = NextResponse.next()
+  const session = await getIronSession(req, res, sessionOptions)
+  console.log(session)
 
-  const { user } = session;
+  const { user } = session
   if (!user) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
-  return res;
+  return res
 }
 
 export const config = {
