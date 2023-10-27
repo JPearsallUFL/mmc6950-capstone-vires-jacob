@@ -46,7 +46,6 @@ const reportSchema = new Schema({
         required: true
     }
 },{
-    collection:'reportSchema',
     versionKey:false
 })
 

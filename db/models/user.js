@@ -47,7 +47,6 @@ const UserSchema = new Schema({
         "default": [reportSchema] 
     },
 },{
-    collection:'UserSchema',
     versionKey: false
 })
 
@@ -58,3 +57,6 @@ UserSchema.pre('save', async function(next) {
   })
   
   export default models.User || model('User', UserSchema)
+
+//   TestingTestingTesting
+//   thisisatestofmyapistuff
