@@ -53,7 +53,7 @@ export default function EditReport(props) {
     }
     async function handleEditReport(e){
         e.preventDefault();
-        if (!supervisorName.trim()) return setError("Must include supervisor name");
+        if (!supervisorName) return setError("Must include supervisor name");
         if (!first_name.trim()) return setError("Must include employee first name");
         if (!last_name.trim()) return setError("Must include employee last name");
         if (!title.trim()) return setError("Must include job title");
@@ -148,6 +148,7 @@ export default function EditReport(props) {
             strength = list.strength
             form.weakness.value = list.weakness
             weakness = list.weakness
+            setForm({supervisorName:list.supervisorName, first_name:list.firstName, last_name:list.lastName, title:list.jobTitle, level:list.jobLevel, bonus:list.bonusEligible, lti:list.longTermIncentive, assessment:list.assessment, strength:list.strength, weakness:list.weakness})
 
 
             document.title += list.reportName
