@@ -127,7 +127,7 @@ export default function NewReport(props) {
                 <div>
                     <h1>New Report for {employeeName}, {currentDate}</h1>
                     <div className="background_stuff">
-                        <button onClick={getEmployeeData}>Import/Overwrite Employee Data</button>
+                        <button onClick={getEmployeeData}>Import/Overwrite Employee Info</button>
                         <Form id="reviewForm" onSubmit={handleCreateReport} className="create_edit">
                             <fieldset className="four_col emp_info">
                             <legend>Employee Info</legend>
@@ -179,6 +179,9 @@ export default function NewReport(props) {
                                         <option value="C1">C1</option>
                                         <option value="C2">C2</option>
                                         <option value="C3">C3</option>
+                                        <option value="D1">D1</option>
+                                        <option value="D2">D2</option>
+                                        <option value="D3">D3</option>
                                     </select>
                                 </div>
                                 <div className="six_col">

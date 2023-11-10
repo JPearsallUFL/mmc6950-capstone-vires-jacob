@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/nani'
 
 let cached = global.mongoose
-console.log("iron: " + process.env.IRON_PASS, " mongo: " + MONGODB_URI)
 if (!cached) {
   cached = global.mongoose = { conn: null, promise: null }
 }
