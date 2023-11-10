@@ -74,7 +74,7 @@ export default function Login(props) {
                 <label htmlFor="password">Password: </label>
                 <input type="password" name="password" id="password" onChange={handleChange} value={password} />
               </div>
-              <div><button>Login</button></div>
+              <div className="login_signup_stuff"><button>Login</button></div>
               {error && <p>{error}</p>}
             </form>
           </div>

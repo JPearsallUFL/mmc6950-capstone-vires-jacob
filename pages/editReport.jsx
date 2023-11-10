@@ -180,7 +180,7 @@ export default function EditReport(props) {
                 <div>
                     <h1 id="pageHeader">Edit Report: </h1>
                     <div className="background_stuff">
-                        <button onClick={getEmployeeData}>Import/Overwrite Employee Data</button>
+                        <button onClick={getEmployeeData}>Import/Overwrite Employee Info</button>
                         <Form id="reviewForm" onSubmit={handleEditReport}>
                             <fieldset className="four_col emp_info">
                             <legend>Employee Info</legend>

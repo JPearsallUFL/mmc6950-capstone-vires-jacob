@@ -13,7 +13,7 @@ export default function Header(props) {
         <Container>
           <Navbar.Brand href="/">
             <img 
-              src="/NaniLogo.png" 
+              src="https://imageupload.io/ib/kK8ODRu2kWfytBI_1699628165.png" 
               height="75"
               className="d-inline-block align-top"
               alt="NANI Logo" 

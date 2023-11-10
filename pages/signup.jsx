@@ -98,7 +98,7 @@ export default function Signup(props) {
                   <label htmlFor="confirm-password">Confirm Password:</label>
                   <input type="password" name="confirm-password" id="confirm-password" onChange={handleChange} value={confirmPassword} />
                 </div>
-                <div><button>Submit</button></div>
+                <div className="login_signup_stuff"><button>Submit</button></div>
                 {error && <p>{error}</p>}
             </form>
             </div>

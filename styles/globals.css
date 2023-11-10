@@ -63,6 +63,14 @@ p{
     padding: 3px 10px;
 }
 
+.login_signup_stuff button{
+    background-color: var(--midnight);
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    min-width: 15%;
+}
+
 table {
     width: 100%;
     border-collapse: separate;
