@@ -80,7 +80,6 @@ export default function Search(props) {
         <main>
           <div>
             <h1>Hi {props?.user?.firstName}, welcome to NANI</h1>
-            <p>This page will auto populate a list of your direct reports!</p>
             <div id="report_map" className="background_stuff">
                 <table id="user_table"></table>
             </div>

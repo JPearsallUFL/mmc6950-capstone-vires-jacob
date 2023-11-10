@@ -182,9 +182,9 @@ export default function NewReport(props) {
                                     </select>
                                 </div>
                                 <div className="six_col">
-                                    <label htmlFor="strength">Strength:</label>
+                                    <label htmlFor="strength">Strengths:</label>
                                     <textarea name="strength" id="strength" cols="30" rows="10" onChange={handleChange} value={strength}>List Strengths here:</textarea>
-                                    <label htmlFor="weakness">Weakness:</label>
+                                    <label htmlFor="weakness">Growth Areas:</label>
                                     <textarea name="weakness" id="weakness" cols="30" rows="10" onChange={handleChange} value={weakness}></textarea>
                                 </div>
                             </fieldset>

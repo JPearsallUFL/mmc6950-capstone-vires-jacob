@@ -181,7 +181,6 @@ export default function EditReport(props) {
                     <h1 id="pageHeader">Edit Report: </h1>
                     <div className="background_stuff">
                         <button onClick={getEmployeeData}>Import/Overwrite Employee Data</button>
-                        <p>The Select options do not retain their values when importing the data, also as soon as start typing, everything clears. Find results?</p>
                         <Form id="reviewForm" onSubmit={handleEditReport}>
                             <fieldset className="four_col emp_info">
                             <legend>Employee Info</legend>
@@ -236,9 +235,9 @@ export default function EditReport(props) {
                                     </select>
                                 </div>
                                 <div className="six_col">
-                                    <label htmlFor="strength">Strength:</label>
+                                    <label htmlFor="strength">Strengths:</label>
                                     <textarea name="strength" id="strength" cols="30" rows="10" onChange={handleChange} value={strength}>List Strengths here:</textarea>
-                                    <label htmlFor="weakness">Weakness:</label>
+                                    <label htmlFor="weakness">Growth Areas:</label>
                                     <textarea name="weakness" id="weakness" cols="30" rows="10" onChange={handleChange} value={weakness}></textarea>
                                 </div>
                             </fieldset>
