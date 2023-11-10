@@ -4,6 +4,7 @@ import sessionOptions from "../config/session";
 import Header from "../components/header";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 //import styles from "../styles/Home.module.css";
 
 export const getServerSideProps = withIronSessionSsr(
@@ -95,12 +96,18 @@ export default function SavedReports(props) {
             let name_cell = document.createElement("td")
             let edit_cell = document.createElement("td")
             let delete_cell = document.createElement("td")
+            
             name_cell.innerHTML = a.name
             row.appendChild(name_cell)
+            let report_options = document.createElement("div")
+            report_options.className = "report_options"
             edit_cell.appendChild(edit_button)
-            row.appendChild(edit_cell)
+            // row.appendChild(edit_cell)
+            report_options.appendChild(edit_cell)
             delete_cell.appendChild(delete_button)
-            row.appendChild(delete_cell)
+            // row.appendChild(delete_cell)
+            report_options.appendChild(delete_cell)
+            row.appendChild(report_options)
             divChange.appendChild(row)
         })
     }
@@ -110,20 +117,23 @@ export default function SavedReports(props) {
 
   return (
     <>
-      <Head>
-        <title>My Reports</title>
-        <meta name="description" content="My Reports" />
-      </Head>
+        <Head>
+            <title>My Reports</title>
+            <meta name="description" content="My Reports" />
+        </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
+        <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
 
-      <main>
-        <h1>My Saved Reports</h1>
-        <div id="report_map">
-            <table id="reports_table"></table>
-        </div>
-      </main>
-
+        <Container>
+            <main>
+                <div>
+                    <h1>My Saved Reports</h1>
+                    <div id="report_map" className="background_stuff">
+                        <table id="reports_table"></table>
+                    </div>
+                </div>
+            </main>
+        </Container>
     </>
   );
 }

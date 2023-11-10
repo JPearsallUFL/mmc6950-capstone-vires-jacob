@@ -6,6 +6,7 @@ import Header from "../components/header";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import singlePerner from "../hooks/singlePerner";
+import { Container } from "react-bootstrap";
 import { getRouteMatcher } from "next/dist/shared/lib/router/utils/route-matcher";
 import { dbConnect } from "../db/controllers/util";
 
@@ -82,23 +83,27 @@ export default function Signup(props) {
 
       <Header isLoggedIn={props.isLoggedIn}/>
 
-      <main>
-        <h1>Create an account below</h1>
-
-        <form onSubmit={handleCreateAccount}>
-            <label htmlFor="username">Username:</label>
-            <input type="text" name="username" id="username" onChange={handleChange} value={username} />
-            <label htmlFor="pernr">Pernr:</label>
-            <input type="text" name="pernr" id="pernr" onChange={handleChange} value={pernr} />
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="password" id="password" onChange={handleChange} value={password} />
-            <label htmlFor="confirm-password">Confirm Password:</label>
-            <input type="password" name="confirm-password" id="confirm-password" onChange={handleChange} value={confirmPassword} />
-            <button>Submit</button>
-            {error && <p>{error}</p>}
-        </form>
-        <Link href="/login">Login Instead?</Link>
-      </main>
+      <Container>
+        <main>
+          <div className="signup_form">
+            <h1>Create an account:</h1>
+            <form onSubmit={handleCreateAccount}>
+                <div className="fields">
+                  <label htmlFor="username">Username:</label>
+                  <input type="text" name="username" id="username" onChange={handleChange} value={username} />
+                  <label htmlFor="pernr">Pernr:</label>
+                  <input type="text" name="pernr" id="pernr" onChange={handleChange} value={pernr} />
+                  <label htmlFor="password">Password:</label>
+                  <input type="password" name="password" id="password" onChange={handleChange} value={password} />
+                  <label htmlFor="confirm-password">Confirm Password:</label>
+                  <input type="password" name="confirm-password" id="confirm-password" onChange={handleChange} value={confirmPassword} />
+                </div>
+                <div><button>Submit</button></div>
+                {error && <p>{error}</p>}
+            </form>
+            </div>
+        </main>
+      </Container>
     </>
   );
 }

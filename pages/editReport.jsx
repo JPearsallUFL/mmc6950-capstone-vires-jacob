@@ -8,6 +8,7 @@ import Link from "next/link";
 import {format} from 'date-fns'
 import singlePerner from "../hooks/singlePerner";
 import { normalizeId } from "../db/controllers/util";
+import { Container, Form } from "react-bootstrap";
 //import styles from "../styles/Home.module.css";
 
 export const getServerSideProps = withIronSessionSsr(
@@ -166,72 +167,88 @@ export default function EditReport(props) {
 
   return (
     <>
-      <Head>
-        <title>Edit Report: </title>
-        <meta name="description" content="Edit Report"/>
-      </Head>
 
-      <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
+        <Head>
+            <title>Edit Report: </title>
+            <meta name="description" content="Edit Report"/>
+        </Head>
 
+        <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
 
-      <main>
-      <h1 id="pageHeader">Edit Report: </h1>
-      <button onClick={getEmployeeData}>Import/Overwrite Employee Data</button>
-      <p>The Select options do not retain their values when importing the data, also as soon as start typing, everything clears. Find results?</p>
-        <form id="reviewForm" onSubmit={handleEditReport}>
-            <fieldset>
-                <legend>This Employee Info Can be pulled from API</legend>
-                <label htmlFor="first_name">Employee First Name:</label>
-                <input type="text" name="first_name" id="first_name" onChange={handleChange} value={first_name} />
-                <label htmlFor="last_name">Employee Last Name:</label>
-                <input type="text" name="last_name" id="last_name" onChange={handleChange} value={last_name} />
-                <label htmlFor="title">Employee Job Title:</label>
-                <input type="text" name="title" id="title" onChange={handleChange} value={title} />
-                <label htmlFor="level">Employee Job Level:</label>
-                <input type="text" name="level" id="level" onChange={handleChange} value={level} />
-                <label htmlFor="pernr">Employee Pernr:</label>
-                <input type="text" name="pernr" id="pernr" onChange={handleChange} value={pernr} />
-                <label htmlFor="supervisorName">Supervisor Name:</label>
-                <input type="text" name="supervisorName" id="supervisorName" onChange={handleChange} value={supervisorName} />
-            </fieldset>
-            <fieldset>
-                <legend>Bonus and LTI Information</legend>
-                <label htmlFor="bonus">Bonus Eligible?:</label>
-                <select name="bonus" id="bonus" onChange={handleChange} required>
-                    <option hidden>True or False?</option>
-                    <option value="false">False</option>
-                    <option value="true">True</option>
-                </select>
-                <label htmlFor="lti">LTI Eligible?:</label>
-                <select name="lti" id="lti" onChange={handleChange} required>
-                    <option hidden>True or False?</option>
-                    <option value="false">False</option>
-                    <option value="true">True</option>
-                </select>
-            </fieldset>
-            <fieldset>
-                <legend>Your Evaluation</legend>
-                <label htmlFor="assessment">Assessment:</label>
-                <select id="assessment" name="assessment" onChange={handleChange}>
-                    <option hidden>Select Assessment</option>
-                    <option value="A1">A1</option>
-                    <option value="A2">A2</option>
-                    <option value="A3">A3</option>
-                    <option value="B1">B1</option>
-                    <option value="B2">B2</option>
-                    <option value="B3">B3</option>
-                    <option value="C1">C1</option>
-                    <option value="C2">C2</option>
-                    <option value="C3">C3</option>
-                </select>
-                <textarea name="strength" id="strength" cols="30" rows="10" onChange={handleChange} value={strength}>List Strengths here:</textarea>
-                <textarea name="weakness" id="weakness" cols="30" rows="10" onChange={handleChange} value={weakness}></textarea>
-            </fieldset>
-            <button>Save</button>
-            {error && <p>{error}</p>}
-        </form>
-        <Link href="/myReports">View Saved Reports?</Link>
-      </main>
+        <Container>
+            <main>
+                <div>
+                    <h1 id="pageHeader">Edit Report: </h1>
+                    <div className="background_stuff">
+                        <button onClick={getEmployeeData}>Import/Overwrite Employee Data</button>
+                        <p>The Select options do not retain their values when importing the data, also as soon as start typing, everything clears. Find results?</p>
+                        <Form id="reviewForm" onSubmit={handleEditReport}>
+                            <fieldset className="four_col emp_info">
+                            <legend>Employee Info</legend>
+                                <label htmlFor="first_name">First Name:</label>
+                                <input type="text" name="first_name" id="first_name" onChange={handleChange} value={first_name} />
+
+                                <label htmlFor="last_name">Last Name:</label>
+                                <input type="text" name="last_name" id="last_name" onChange={handleChange} value={last_name} />
+
+                                <label htmlFor="title">Job Title:</label>
+                                <input type="text" name="title" id="title" onChange={handleChange} value={title} />
+
+                                <label htmlFor="level">Job Level:</label>
+                                <input type="text" name="level" id="level" onChange={handleChange} value={level} />
+
+                                <label htmlFor="pernr">Pernr:</label>
+                                <input type="text" name="pernr" id="pernr" onChange={handleChange} value={pernr} />
+
+                                <label htmlFor="supervisorName">Supervisor:</label>
+                                <input type="text" name="supervisorName" id="supervisorName" onChange={handleChange} value={supervisorName} />
+                            </fieldset>
+                            <fieldset className="four_col benefits">
+                            <legend>Bonus & LTI Eligiblity</legend>
+                                <label htmlFor="bonus">Bonus:</label>
+                                <select name="bonus" id="bonus" onChange={handleChange} required>
+                                    <option hidden>True or False?</option>
+                                    <option value="false">False</option>
+                                    <option value="true">True</option>
+                                </select>
+                                <label htmlFor="lti">LTI:</label>
+                                <select name="lti" id="lti" onChange={handleChange} required>
+                                    <option hidden>True or False?</option>
+                                    <option value="false">False</option>
+                                    <option value="true">True</option>
+                                </select>
+                            </fieldset>
+                            <fieldset>
+                            <legend>Your Evaluation</legend>
+                                <div className="assessment">
+                                    <label htmlFor="assessment">Assessment:</label>
+                                    <select id="assessment" name="assessment" onChange={handleChange}>
+                                        <option hidden>Select Assessment</option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
+                                        <option value="A3">A3</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B2">B2</option>
+                                        <option value="B3">B3</option>
+                                        <option value="C1">C1</option>
+                                        <option value="C2">C2</option>
+                                        <option value="C3">C3</option>
+                                    </select>
+                                </div>
+                                <div className="six_col">
+                                    <label htmlFor="strength">Strength:</label>
+                                    <textarea name="strength" id="strength" cols="30" rows="10" onChange={handleChange} value={strength}>List Strengths here:</textarea>
+                                    <label htmlFor="weakness">Weakness:</label>
+                                    <textarea name="weakness" id="weakness" cols="30" rows="10" onChange={handleChange} value={weakness}></textarea>
+                                </div>
+                            </fieldset>
+                            <div><button>Save</button></div>
+                            {error && <p>{error}</p>}
+                        </Form>
+                    </div>
+                </div>
+            </main>
+        </Container>
     </>
   );
 }

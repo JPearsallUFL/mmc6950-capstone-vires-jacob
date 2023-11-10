@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { withIronSessionSsr } from "iron-session/next";
 import sessionOptions from "../config/session";
 import Header from "../components/header";
+import { Container } from "react-bootstrap";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
@@ -60,23 +61,25 @@ export default function Login(props) {
 
       <Header isLoggedIn={props.isLoggedIn} />
 
-      <main>
-        <h1>
-          Welcome back! Log in below.
-        </h1>
+      <Container>
+        <main>
+          <div className="signup_form">
+            <h1>Welcome back!</h1>
+            <h2>Login Below.</h2>
 
-        <form onSubmit={handleLogin}>
-          <label htmlFor="username">Username: </label>
-          <input type="text" name="username" id="username" onChange={handleChange} value={username} />
-          <label htmlFor="password">Password: </label>
-          <input type="password" name="password" id="password" onChange={handleChange} value={password} />
-          <button>Login</button>
-          {error && <p>{error}</p>}
-        </form>
-        <Link href="/signup">
-          <p>Sign up instead?</p>
-        </Link>
-      </main>
+            <form onSubmit={handleLogin}>
+              <div className="fields">
+                <label htmlFor="username">Username: </label>
+                <input type="text" name="username" id="username" onChange={handleChange} value={username} />
+                <label htmlFor="password">Password: </label>
+                <input type="password" name="password" id="password" onChange={handleChange} value={password} />
+              </div>
+              <div><button>Login</button></div>
+              {error && <p>{error}</p>}
+            </form>
+          </div>
+        </main>
+      </Container>
     </>
   );
 }

@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import singlePerner from "../hooks/singlePerner";
 import Link from "next/link";
 import { useEffect } from "react";
+import { Container } from "react-bootstrap";
 
 export const getServerSideProps = withIronSessionSsr(
   async function getServerSideProps({ req }) {
@@ -75,14 +76,17 @@ export default function Search(props) {
 
       <Header isLoggedIn={props.isLoggedIn} username={props?.user?.username} />
 
-      <main>
-        <h1>Hi {props?.user?.firstName}, welcome to NANI</h1>
-        <p>This page will auto populate a list of your direct reports!</p>
-        <div id="report_map">
-            <table id="user_table"></table>
-        </div>
-      </main>
-
+      <Container className="d-flex align-items-center">
+        <main>
+          <div>
+            <h1>Hi {props?.user?.firstName}, welcome to NANI</h1>
+            <p>This page will auto populate a list of your direct reports!</p>
+            <div id="report_map" className="background_stuff">
+                <table id="user_table"></table>
+            </div>
+          </div>
+        </main>
+      </Container>
     </>
   );
 }
