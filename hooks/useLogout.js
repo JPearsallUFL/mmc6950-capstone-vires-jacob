@@ -4,11 +4,11 @@ export default function useLogout() {
   const router = useRouter()
   return async function handleLogout() {
     try {
-      router.push("/")
       const res = await fetch('/api/auth/logout', {method: 'POST'})
-      if (res.status === 200)
-        console.log("User Logged Out")
+      if (res.status === 200){
         router.replace(router.asPath)
+        router.refresh
+      }
     } catch(err) {
       console.log(err)
     }

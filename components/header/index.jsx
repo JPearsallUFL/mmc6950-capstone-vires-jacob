@@ -26,7 +26,7 @@ export default function Header(props) {
               <Nav>
                 <Nav.Link href="/search" className="link-danger fs-5">Search</Nav.Link>
                 <Nav.Link href="/myReports" className="link-danger fs-5">My Saved Reports</Nav.Link>
-                <Nav.Link href="/" onClick={logout} className="link-danger fs-5">Logout</Nav.Link>
+                <Nav.Link onClick={logout} className="link-danger fs-5">Logout</Nav.Link>
               </Nav>
               </>
             ) : (
