@@ -1,6 +1,7 @@
 import Link from "next/link";
 import useLogout from "../../hooks/useLogout";
 import {Container, Nav, Navbar, NavDropdown, Row, Col} from 'react-bootstrap'
+// import logo from "./public/NANILogo.png"
 
 
 export default function Header(props) {
@@ -13,7 +14,7 @@ export default function Header(props) {
         <Container>
           <Navbar.Brand href="/">
             <img 
-              src="https://imageupload.io/ib/kK8ODRu2kWfytBI_1699628165.png" 
+              src="/NANILogo.png" 
               height="75"
               className="d-inline-block align-top"
               alt="NANI Logo" 
