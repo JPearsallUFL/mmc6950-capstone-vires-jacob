@@ -1,5 +1,7 @@
 NANI
 
+Live Url:(https://nani-0fa9c37a48f0.herokuapp.com/)
+
 NANI is a web application that enables team leaders to submit evaluations on their employees to their leadership. This application streamlines the process of creating and managing employee evaluation reports, making it easier for team leaders to provide feedback and track employee performance.
 
 Features
@@ -18,6 +20,8 @@ Follow these steps to set up and run the Employee Evaluation System locally:
 Prerequisites
 
 Node.js: Make sure you have Node.js installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
+
+Docker Desktop: Make sure you have Docker Desktop installed and running on your system. You can download it from [docker.com](https://www.docker.com/products/docker-desktop/).
 
 Installation Steps
 
@@ -40,20 +44,21 @@ Installation Steps
 
 5. Start application:
 
-	npm start 
+	npm run dev
 
 6. Access the application in your web browser at `http://localhost:3000`.
 
-7. I will continue to update this as I progress through the creation
+7. Begin Coding
 
 Designed Usage
 
-1. Register for an account or log in if you already have one.
-2. After logging in, you will be able to search for your direct reports by name.
-3. Select an employee from the search results to open a new evaluation report.
-4. Fill out the evaluation report with feedback and ratings for the employee.
-5. Save the evaluation report, and it will be stored in your reports for future reference.
-6. Submit report to leadership for further conversation.
+1. Before Signing up or logging in, confirm you are on "the most magical" network. 
+2. Register for an account or log in if you already have one.
+3. After logging in, you will be able to search for your direct reports by name.
+4. Select an employee from the search results to open a new evaluation report.
+5. Fill out the evaluation report with feedback and ratings for the employee.
+6. Save the evaluation report, and it will be stored in your reports for future reference.
+7. Submit report to leadership for further conversation.
 
 Technology Stack
 
