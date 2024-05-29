@@ -1,5 +1,5 @@
 export default async function getDirectReports(pernr) {
-    const rostrToken = "b73227f7a59a6e7b14f378afb043ffd6"
+    const rostrToken = "b9edded6914cd316deaa627e18d90cc2"
     const url = "https://rostr.disney.com/api/v2/org_charts/"
     const token = "?locale=en&token="
     try {
